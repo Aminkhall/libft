@@ -6,36 +6,34 @@
 /*   By: mkhallou <mkhallou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:46:27 by mkhallou          #+#    #+#             */
-/*   Updated: 2024/11/04 18:17:46 by mkhallou         ###   ########.fr       */
+/*   Updated: 2024/11/09 20:26:33 by mkhallou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	int		sign;
-	size_t	num;
+	char		*src;
+	size_t		j;
+	size_t		i;
 
-	sign = 1;
-	num = 0;
-	while ((*str >= 9 && *str <= 13) || (*str == 32))
-		str++;
-	if (*str == '-')
+	if (!haystack && !len)
+		return (NULL);
+	src = (char *) haystack;
+	if (!*needle)
+		return (src);
+	i = 0;
+	while (src[i] && len > i)
 	{
-		sign = -sign;
-		str++;
+		j = 0;
+		while (needle[j] == src[i + j] && len > (i + j))
+		{
+			if (needle[j + 1] == '\0')
+				return (src + i);
+			j++;
+		}
+		i++;
 	}
-	else if (*str == '+')
-		str++;
-	while (ft_isdigit(*str))
-	{
-		num = num * 10 + (*str - '0');
-		str++;
-		if (sign > 0 && num > (9223372036854775807))
-			return (-1);
-		else if (sign < 0 && num - 1 > (9223372036854775807))
-			return (0);
-	}
-	return ((int)num * sign);
+	return (NULL);
 }
