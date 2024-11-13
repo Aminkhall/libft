@@ -6,34 +6,36 @@
 /*   By: mkhallou <mkhallou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:46:27 by mkhallou          #+#    #+#             */
-/*   Updated: 2024/11/09 20:26:33 by mkhallou         ###   ########.fr       */
+/*   Updated: 2024/11/13 18:47:32 by mkhallou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+int	ft_atoi(const char *str)
 {
-	char		*src;
-	size_t		j;
-	size_t		i;
+	int		sign;
+	long	num;
+	long	t;
 
-	if (!haystack && !len)
-		return (NULL);
-	src = (char *) haystack;
-	if (!*needle)
-		return (src);
-	i = 0;
-	while (src[i] && len > i)
+	sign = 1;
+	num = 0;
+	while ((*str >= 9 && *str <= 13) || (*str == 32))
+		str++;
+	if (*str == '-')
 	{
-		j = 0;
-		while (needle[j] == src[i + j] && len > (i + j))
-		{
-			if (needle[j + 1] == '\0')
-				return (src + i);
-			j++;
-		}
-		i++;
+		sign = -sign;
+		str++;
 	}
-	return (NULL);
+	else if (*str == '+')
+		str++;
+	while (ft_isdigit(*str))
+	{
+		num = num * 10 + (*str - '0');
+		str++;
+		if (t > num)
+			return (-(sign > 0));t = num;
+		
+	}
+	return ((int)num * sign);
 }
